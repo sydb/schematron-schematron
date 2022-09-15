@@ -29,7 +29,7 @@
   </xsl:function>
 
   <sch:pattern>
-    <sch:rule context="sch:rule/@context | sch:assert/@test | sch:report/@test | sch:value-of/@select | sch:name/@path | sch:pattern/@documents | xsl:copy-of/@select">
+    <sch:rule context="sch:rule/@context | sch:assert/@test | sch:report/@test | sch:value-of/@select | sch:let/@value | sch:name/@path | sch:pattern/@documents | xsl:copy-of/@select">
       <sch:let name="queryBinding" value="lower-case((ancestor::sch:schema/@queryBinding, $queryBinding, 'xslt')[1])"/>
       <sch:let name="result" value="fn:validate-xpath(., $queryBinding)/self::ERROR"/>
       <sch:report test="$result/self::ERROR">

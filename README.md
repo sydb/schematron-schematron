@@ -8,6 +8,7 @@ Schematron Schematron is a Schematron schema that checks XPath expressions in yo
 It checks the following attributes:
 
 - ```sch:assert/@test```
+- ```sch:let/@value```
 - ```sch:path/@name```
 - ```sch:pattern/@documents```
 - ```sch:report/@test```
