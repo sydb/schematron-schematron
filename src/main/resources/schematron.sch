@@ -13,8 +13,12 @@
     <sch:rule context="sch:rule/@context | sch:assert/@test | sch:report/@test | sch:value-of/@select | sch:let/@value | sch:name/@path | sch:pattern/@documents | xsl:copy-of/@select">
       <sch:let name="queryBinding" value="lower-case((ancestor::sch:schema/@queryBinding, $queryBinding, 'xslt')[1])"/>
       <sch:let name="result" value="fn:validate-xpath(., $queryBinding)"/>
+      <sch:let name="invalid" value="fn:find-invalid-functions(fn:get-xpath-functions($result, $queryBinding), $queryBinding)"/>
       <sch:report test="$result/ERROR">
         <sch:value-of select="$result/ERROR"/>
+      </sch:report>
+      <sch:report test="exists($invalid)" role="WARNING">
+        The XPath expression may contain one or more unknown function: <sch:value-of select="$invalid/@name"/>.
       </sch:report>
     </sch:rule>
   </sch:pattern>

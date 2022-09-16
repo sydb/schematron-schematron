@@ -24,4 +24,50 @@
     </xsl:choose>
   </xsl:function>
 
+  <xsl:function name="fn:get-xpath-functions" as="element(function)*">
+    <xsl:param name="parsedExpr" as="element()"/>
+    <xsl:param name="queryBinding" as="xs:string"/>
+
+    <xsl:choose>
+      <xsl:when test="$queryBinding eq 'xslt2'">
+        <xsl:for-each-group select="$parsedExpr//FunctionCall" group-by="string(FunctionName/QName)">
+          <xsl:sort select="current-grouping-key()"/>
+          <function name="{current-grouping-key()}"/>
+        </xsl:for-each-group>
+      </xsl:when>
+      <xsl:when test="$queryBinding eq 'xslt3'">
+        <xsl:for-each-group select="$parsedExpr//FunctionCall" group-by="string(FunctionEQName/FunctionName/QName)">
+          <xsl:sort select="current-grouping-key()"/>
+          <function name="{current-grouping-key()}" arity="{count(ArgumentList/Argument)}"/>
+        </xsl:for-each-group>
+      </xsl:when>
+      <xsl:otherwise>
+        <xsl:message terminate="yes">Unsupported query language binding: <xsl:value-of select="$queryBinding"/></xsl:message>
+      </xsl:otherwise>
+    </xsl:choose>
+
+  </xsl:function>
+
+  <xsl:function name="fn:find-invalid-functions" as="element(function)*">
+    <xsl:param name="exprFunctions" as="element(function)*"/>
+    <xsl:param name="queryBinding" as="xs:string"/>
+
+    <xsl:variable name="functions" as="element(function)*">
+      <xsl:choose>
+        <xsl:when test="$queryBinding eq 'xslt2'">
+          <xsl:sequence select="doc('xpath20-functions-and-operators.xml')/functions/function"/>
+        </xsl:when>
+        <xsl:when test="$queryBinding eq 'xslt3'">
+          <xsl:sequence select="doc('xpath31-functions-and-operators.xml')/functions/function"/>
+        </xsl:when>
+        <xsl:otherwise>
+          <xsl:message terminate="yes">Unsupported query language binding: <xsl:value-of select="$queryBinding"/></xsl:message>
+        </xsl:otherwise>
+      </xsl:choose>
+    </xsl:variable>
+
+    <xsl:sequence select="$exprFunctions except $exprFunctions[@name = $functions/@name]"/>
+
+  </xsl:function>
+
 </xsl:transform>
