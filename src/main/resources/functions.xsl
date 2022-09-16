@@ -66,7 +66,7 @@
       </xsl:choose>
     </xsl:variable>
 
-    <xsl:sequence select="$exprFunctions except $exprFunctions[@name = $functions/@name]"/>
+    <xsl:sequence select="$exprFunctions except $exprFunctions[fn:pretty-print-function(.) = fn:pretty-print-function($functions)]"/>
 
   </xsl:function>
 
