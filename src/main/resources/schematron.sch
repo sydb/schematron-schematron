@@ -18,7 +18,7 @@
         <sch:value-of select="$result/ERROR"/>
       </sch:report>
       <sch:report test="exists($invalid)" role="WARNING">
-        The XPath expression may contain one or more unknown function: <sch:value-of select="$invalid/@name"/>.
+        The XPath expression may contain one or more unknown function: <sch:value-of select="fn:pretty-print-function($invalid)"/>.
       </sch:report>
     </sch:rule>
   </sch:pattern>

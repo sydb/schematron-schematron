@@ -70,4 +70,11 @@
 
   </xsl:function>
 
+  <xsl:function name="fn:pretty-print-function" as="xs:string*">
+    <xsl:param name="function" as="element(function)*"/>
+    <xsl:for-each select="$function">
+      <xsl:value-of select="if (@arity) then concat(@name, '#', @arity) else @name"/>
+    </xsl:for-each>
+  </xsl:function>
+
 </xsl:transform>
