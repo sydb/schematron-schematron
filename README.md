@@ -35,6 +35,10 @@ The [XPath 2.0](src/main/resources/xpath20.xslt) and [XPath 3.1](src/main/resour
 by the [REx Parser Generator](https://bottlecaps.de/rex/) by Gunther Rademacher and contain fragments of REx source code
 supplied under the Apache 2.0 license.
 
+The function and operator libraries where extract from the respective documents, the XPath 2.0
+[specification](https://www.w3.org/TR/2010/REC-xpath-functions-20101214/xpath-functions-20101214.xml) and the XPath 3.1
+[function catalog](https://www.w3.org/TR/2017/REC-xpath-functions-31-20170321/function-catalog.xml).
+
 ## Authors
 
 David Maus &lt;dmaus@dmaus.name&gt;
