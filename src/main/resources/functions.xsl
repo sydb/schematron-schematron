@@ -66,7 +66,14 @@
       </xsl:choose>
     </xsl:variable>
 
-    <xsl:sequence select="$exprFunctions except $exprFunctions[fn:pretty-print-function(.) = fn:pretty-print-function($functions)]"/>
+    <xsl:choose>
+      <xsl:when test="$queryBinding eq 'xslt2'">
+        <xsl:sequence select="$exprFunctions except $exprFunctions[@name = $functions/@name]"/>
+      </xsl:when>
+      <xsl:when test="$queryBinding eq 'xslt3'">
+        <xsl:sequence select="$exprFunctions except $exprFunctions[fn:pretty-print-function(.) = fn:pretty-print-function($functions)]"/>
+      </xsl:when>
+    </xsl:choose>
 
   </xsl:function>
 
