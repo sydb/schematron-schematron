@@ -42,3 +42,8 @@ The function and operator libraries where extract from the respective documents,
 ## Authors
 
 David Maus &lt;dmaus@dmaus.name&gt;
+
+## Bibliography
+
+Kosek, Jirka. 2017. “Improving Validation of Structured Text.” In XML London 2017 Conference Proceedings, 56–67. London,
+United Kingdom: XML London. https://doi.org/10.14337/XMLLondon17.Kosek01.
