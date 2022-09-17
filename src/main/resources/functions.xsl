@@ -32,7 +32,9 @@
       <xsl:when test="$queryBinding eq 'xslt2'">
         <xsl:for-each-group select="$parsedExpr//FunctionCall" group-by="string(FunctionName/QName)">
           <xsl:sort select="current-grouping-key()"/>
-          <function name="{current-grouping-key()}"/>
+          <xsl:if test="not(contains(current-grouping-key(), ':'))">
+            <function name="{current-grouping-key()}"/>
+          </xsl:if>
         </xsl:for-each-group>
       </xsl:when>
       <xsl:when test="$queryBinding eq 'xslt3'">
