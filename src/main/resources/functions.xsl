@@ -38,9 +38,9 @@
         </xsl:for-each-group>
       </xsl:when>
       <xsl:when test="$queryBinding eq 'xslt3'">
-        <xsl:for-each-group select="$parsedExpr//FunctionCall" group-by="string(FunctionEQName/FunctionName/QName)">
-          <xsl:sort select="current-grouping-key()"/>
-          <function name="{current-grouping-key()}" arity="{count(ArgumentList/Argument)}"/>
+        <xsl:for-each-group select="$parsedExpr//FunctionCall" composite="yes" group-by="(string(FunctionEQName/FunctionName/QName), count(ArgumentList/Argument))">
+          <xsl:sort select="current-grouping-key()[1]"/>
+          <function name="{current-grouping-key()[1]}" arity="{current-grouping-key()[2]}"/>
         </xsl:for-each-group>
       </xsl:when>
       <xsl:otherwise>
