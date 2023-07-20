@@ -7,4 +7,8 @@
     <import-uri>https://pkg.dmaus.name/expath/schematron-schematron/schematron.sch</import-uri>
     <file>schematron.sch</file>
   </schematron>
+  <xproc>
+    <import-uri>https://pkg.dmaus.name/expath/schematron-schematron/step.xpl</import-uri>
+    <file>step.xpl</file>
+  </xproc>
 </package>
