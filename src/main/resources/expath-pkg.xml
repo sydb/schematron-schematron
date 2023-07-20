@@ -1,4 +1,4 @@
-<package xmlns=" http://expath.org/ns/pkg"
+<package xmlns="http://expath.org/ns/pkg"
          name="tag:dmaus@dmaus.name,2022:Schematron-Schematron"
          abbrev="schematron-schematron"
          version="1.1" spec="1.0">
