@@ -16,6 +16,12 @@ It checks the following attributes:
 - ```sch:value-of/@name```
 - ```xsl:copy-of/@select```
 
+Starting with version 1.1 it also performs a static analysis of the expression and warns about the following potential
+problems:
+
+- QNames with prefixes that are not declared by a ```sch:ns``` element
+- function in the null namespaces that are not defined by the XPath function and operator specifications
+
 The idea of Schematron Schematron was conceived during the [TEI 2022 Conference](https://conferences.ncl.ac.uk/tei2022/)
 in a discussion with [Martin Holmes](https://github.com/martindholmes).
 
@@ -28,8 +34,8 @@ the default value by passing the parameter ```queryBinding``` to the validation 
 
 ## License
 
-Schematron Schematron is copyright (c) 2022 by David Maus &lt;dmaus@dmaus.name&gt; and released under the terms of the
-MIT license.
+Schematron Schematron is copyright (c) by David Maus &lt;dmaus@dmaus.name&gt; and released under the terms of the MIT
+license.
 
 The [XPath 2.0](src/main/resources/xpath20.xslt) and [XPath 3.1](src/main/resources/xpath31.xslt) parsers are generated
 by the [REx Parser Generator](https://bottlecaps.de/rex/) by Gunther Rademacher and contain fragments of REx source code
