@@ -8,6 +8,18 @@
   <xsl:include href="xpath20.xslt"/>
   <xsl:include href="xpath31.xslt"/>
 
+  <xsl:key name="fn:qname-by-context" match="QName[empty(*)]"
+           use="(ancestor::VarName, ancestor::NameTest, ancestor::FunctionCall)[1] => local-name()"/>
+  <xsl:key name="fn:qname-by-context" match="QName[empty(*)]"
+           use="'#ALL'"/>
+
+  <xsl:function name="fn:get-qname-prefixes" as="xs:string*">
+    <xsl:param name="parsedExpr" as="element()"/>
+    <xsl:for-each-group select="key('fn:qname-by-context', '#ALL', $parsedExpr)[contains(., ':')]" group-by="string(.)">
+      <xsl:value-of select="substring-before(., ':')"/>
+    </xsl:for-each-group>
+  </xsl:function>
+
   <xsl:function name="fn:validate-xpath" as="item()*">
     <xsl:param name="exprAttr" as="attribute()"/>
     <xsl:param name="queryBinding" as="xs:string"/>
