@@ -7,21 +7,32 @@
 
   <sch:let name="queryBinding" value="'xslt2'"/>
 
+  <sch:phase id="embedded">
+    <sch:active pattern="embedded"/>
+  </sch:phase>
+
   <xsl:include href="functions.xsl"/>
 
-  <sch:pattern>
+  <sch:pattern id="embedded">
     <sch:rule context="sch:rule/@context | sch:assert/@test | sch:report/@test | sch:value-of/@select | sch:let/@value | sch:name/@path | sch:pattern/@documents | xsl:copy-of/@select">
-      <sch:let name="schema" value="ancestor::sch:schema"/>
       <sch:let name="queryBinding" value="lower-case((ancestor::sch:schema/@queryBinding, $queryBinding, 'xslt')[1])"/>
       <sch:let name="result" value="fn:validate-xpath(., $queryBinding)"/>
       <sch:let name="invalid-fn" value="fn:find-invalid-functions(fn:get-xpath-functions($result, $queryBinding), $queryBinding)"/>
-      <sch:let name="unbound-ns" value="fn:get-qname-prefixes($result)[not(. = $schema/sch:ns/@prefix)]"/>
       <sch:report test="$result/ERROR">
         <sch:value-of select="$result/ERROR"/>
       </sch:report>
       <sch:report test="exists($invalid-fn)" role="WARNING">
         The XPath expression may contain one or more unknown function: <sch:value-of select="fn:pretty-print-function($invalid-fn)"/>.
       </sch:report>
+    </sch:rule>
+  </sch:pattern>
+
+  <sch:pattern>
+    <sch:rule context="sch:rule/@context | sch:assert/@test | sch:report/@test | sch:value-of/@select | sch:let/@value | sch:name/@path | sch:pattern/@documents | xsl:copy-of/@select">
+      <sch:let name="schema" value="ancestor::sch:schema"/>
+      <sch:let name="queryBinding" value="lower-case((ancestor::sch:schema/@queryBinding, $queryBinding, 'xslt')[1])"/>
+      <sch:let name="result" value="fn:validate-xpath(., $queryBinding)"/>
+      <sch:let name="unbound-ns" value="fn:get-qname-prefixes($result)[not(. = $schema/sch:ns/@prefix)]"/>
       <sch:report test="exists($unbound-ns)" role="WARNING">
         The XPath expression may contain one or more unbound namespace prefixes: <sch:value-of select="$unbound-ns"/>.
       </sch:report>
