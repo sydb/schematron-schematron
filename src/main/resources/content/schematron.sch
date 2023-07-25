@@ -18,8 +18,8 @@
       <sch:let name="queryBinding" value="lower-case((ancestor::sch:schema/@queryBinding, $queryBinding, 'xslt')[1])"/>
       <sch:let name="result" value="fn:validate-xpath(., $queryBinding)"/>
       <sch:let name="invalid-fn" value="fn:find-invalid-functions(fn:get-xpath-functions($result, $queryBinding), $queryBinding)"/>
-      <sch:report test="$result/ERROR">
-        <sch:value-of select="$result/ERROR"/>
+      <sch:report test="$result[self::ERROR]">
+        <sch:value-of select="$result[self::ERROR]"/>
       </sch:report>
       <sch:report test="exists($invalid-fn)" role="WARNING">
         The XPath expression may contain one or more unknown function: <sch:value-of select="fn:pretty-print-function($invalid-fn)"/>.
