@@ -34,7 +34,7 @@
       <sch:let name="result" value="fn:validate-xpath(., $queryBinding)"/>
       <sch:let name="bound-ns" value="($schema/sch:ns/@prefix, 'xml')"/>
       <sch:let name="unbound-ns" value="fn:get-qname-prefixes($result)[not(. = $bound-ns)]"/>
-      <sch:report test="exists($unbound-ns)" role="WARNING">
+      <sch:report test="exists($unbound-ns)" role="WARNING" id="unbound-qname-ns">
         The XPath expression may contain one or more unbound namespace prefixes: <sch:value-of select="$unbound-ns"/>.
       </sch:report>
     </sch:rule>
