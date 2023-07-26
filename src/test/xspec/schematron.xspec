@@ -3,12 +3,6 @@
                    xmlns:xspec="http://www.jenitennison.com/xslt/xspec">
 
   <xspec:scenario label="XSLT 2.0 query language binding">
-    <xspec:scenario label="The generate-id() function">
-      <xspec:context>
-        <sch:rule context="element[generate-id()]"/>
-      </xspec:context>
-      <xspec:expect-not-report id="unknown-function"/>
-    </xspec:scenario>
     <xspec:scenario label="Namespace prefixes in QNames">
       <xspec:scenario label="QName with undeclared prefix">
         <xspec:context>
@@ -34,12 +28,6 @@
   </xspec:scenario>
 
   <xspec:scenario label="XSLT 3.0 query language binding">
-    <xspec:scenario label="The generate-id() function">
-      <xspec:context>
-        <sch:rule context="element[generate-id()]"/>
-      </xspec:context>
-      <xspec:expect-not-report id="unknown-function"/>
-    </xspec:scenario>
     <xspec:scenario label="Namespace prefixes in QNames">
       <xspec:scenario label="QName with undeclared prefix">
         <xspec:context>
