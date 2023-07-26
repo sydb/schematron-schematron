@@ -11,7 +11,7 @@
     </functions>
   </xsl:template>
 
-  <xsl:template match="example[@role = 'signature']/proto" as="element(function)">
+  <xsl:template match="proto" as="element(function)">
     <function name="{@name}" arity="{count(arg)}"/>
   </xsl:template>
 
